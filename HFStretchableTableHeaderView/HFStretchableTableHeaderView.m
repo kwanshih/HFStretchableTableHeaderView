@@ -34,16 +34,16 @@
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
 {
+    if(scrollView.contentOffset.y > 0) return;
+    
     CGRect f = _view.frame;
     f.size.width = _tableView.frame.size.width;
     _view.frame = f;
     
-    if(scrollView.contentOffset.y < 0) {
-        CGFloat offsetY = (scrollView.contentOffset.y + scrollView.contentInset.top) * -1;
-        initialFrame.origin.y = offsetY * -1;
-        initialFrame.size.height = defaultViewHeight + offsetY;
-        _view.frame = initialFrame;
-    }
+    CGFloat offsetY = (scrollView.contentOffset.y + scrollView.contentInset.top) * -1;
+    initialFrame.origin.y = offsetY * -1;
+    initialFrame.size.height = defaultViewHeight + offsetY;
+     _view.frame = initialFrame;
 }
 
 - (void)resizeView
